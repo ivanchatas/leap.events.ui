@@ -39,7 +39,7 @@ export class TicketSaleComponent implements OnInit{
     if (this.eventId) {
       this.ticketSaleService.getTicketsByEventId(this.eventId)
         .subscribe((response) => {
-          this.list = response;
+          this.list = response.data;
         });
     }
   }

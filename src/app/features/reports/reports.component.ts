@@ -25,14 +25,14 @@ export class ReportsComponent {
   fetchListHighSalesByAmount(): void {
     this.ticketSaleService.getHighestSellingByAmount()
     .subscribe((response) => {
-      this.listHighSalesByAmount = response;
+      this.listHighSalesByAmount = response.data;
     });
   }
 
   fetchListHighSalesByPrice(): void {
     this.ticketSaleService.getHighestSellingByPrice()
     .subscribe((response) => {
-      this.listHighSalesByPrice = response;
+      this.listHighSalesByPrice = response.data;
     });
   }
 

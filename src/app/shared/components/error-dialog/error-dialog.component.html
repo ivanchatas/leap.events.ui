@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+
+<mat-dialog-content class="mat-typography">
+  <div [ngClass]="{
+    'error-message': data.type === 'error',
+    'warning-message': data.type === 'warning',
+    'info-message': data.type === 'info'
+  }">
+    <mat-icon [color]="data.type === 'error' ? 'warn' : (data.type === 'warning' ? 'accent' : 'primary')">
+      {{ data.type === 'error' ? 'error' : (data.type === 'warning' ? 'warning' : 'info') }}
+    </mat-icon>
+    <p>{{ data.message }}</p>
+  </div>
+
+  <div *ngIf="data.details">
+    <h3>Details:</h3>
+    <pre>{{ data.details }}</pre>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button type="button" class="btn btn-dark" (click)="onClose()">Accept</button>
+</mat-dialog-actions>

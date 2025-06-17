@@ -37,12 +37,10 @@ export class EventsComponent {
   }
 
   fetchList(): void {
-    this.eventService.get(this.days).subscribe((response) => {
-      this.list = response;
+    this.eventService.getUpcoming(this.days)
+    .subscribe((response) => {
+      this.list = response.data;
     });
-  }
-
-  viewClient(id: string): void {
   }
 
   onChange(value: any): void {

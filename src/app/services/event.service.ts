@@ -1,18 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../environments/environment.development';
+import { environment } from '../../environments/environment.development';
+import { ServiceBase } from './service-base';
+import { Response } from '../models/response.model';
+import { DialogService } from '../shared/services/dialog.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EventService {
+export class EventService extends ServiceBase{
 
-  apiUrl = `${environment.API_SERVER_URL}/Event`;
+  constructor(http: HttpClient, dialogService: DialogService) {
+    super(http, `${environment.API_SERVER_URL}/Event`, dialogService);
+  }
 
-  constructor(private http: HttpClient) { }
-
-  get(days: number): Observable<Event[]> {
-    return this.http.get<Event[]>(`${this.apiUrl}/upcoming?days=${days}`);
+  getUpcoming(days: number): Observable<Response<Event[]>> {
+    return this.get<Response<Event[]>>(`upcoming?days=${days}`);
   }
 }
