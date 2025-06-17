@@ -46,8 +46,6 @@ This section is dedicated to cross-cutting concerns and reusable components that
 
 ---
 
-**Optional Sections to Add (Highly Recommended for a complete README):**
-
 ## Technologies Used
 
 * [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
