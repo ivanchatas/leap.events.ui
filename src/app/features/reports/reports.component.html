@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Reports</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <h4>Highest Selling By Amount</h4>
+            <div class="table-responsive">
+                <table class="table table-centered table-striped dt-responsive nowrap w-100">
+                    <thead> 
+                        <tr> 
+                            <th class="text-center" scope="col">Name</th>
+                            <th class="text-center" scope="col">Tickets Amount</th>
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        @for(list of listHighSalesByAmount; track listHighSalesByAmount) {
+                            <tr>
+                                <td>{{ list.eventName }}</td>
+                                <td class="text-center">{{ list.value }}</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-6">
+            <h4>Highest Selling By Price</h4>
+            <div class="table-responsive">
+                <table class="table table-centered table-striped dt-responsive nowrap w-100">
+                    <thead> 
+                        <tr> 
+                            <th class="text-center" scope="col">Name</th>
+                            <th class="text-center" scope="col">Total Sales</th>
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        @for(list of listHighSalesByPrice; track listHighSalesByPrice) {
+                            <tr>
+                                <td>{{ list.eventName }}</td>
+                                <td class="text-center">{{ USDollar.format(list.value) }}</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

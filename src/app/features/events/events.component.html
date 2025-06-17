@@ -1,0 +1,28 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Events</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        Upcoming events within the next &nbsp;
+        <select class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1" 
+            aria-label="Default select example" 
+            [(ngModel)]="days" (change)="onChange($event)">
+            <option default value="30">30</option>
+            <option value="60">60</option>
+            <option value="180">180</option>
+        </select>
+        &nbsp; days 
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <app-table [data]="list" [columns]="tableColumns">
+                <ng-template #actionsColumn let-event>
+                    <a [routerLink]="['/ticketsales', event.id]" class="action-icon"> 
+                        <i class="bi bi-eye"></i>
+                    </a>
+                </ng-template>
+            </app-table>
+        </div>
+    </div>
+</div>

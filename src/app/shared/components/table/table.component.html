@@ -1,0 +1,92 @@
+<div class="row justify-content-between mb-2">
+  <div class="col-auto">
+    <div class="mb-2">
+      <input id="filter" type="search" class="form-control"
+        [(ngModel)]="filterText" (input)="applyFilterAndPagination()" placeholder="Search...">
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="d-flex flex-wrap align-items-center">
+      <label for="itemsPerPage" class="me-2">Items per page:</label>
+      <div class="me-sm-3">
+        <select id="itemsPerPage" class="form-select my-1 my-md-0"[(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()">  
+          @for (option of itemsPerPageOptions; track option) {
+            <option [value]="option">{{ option }}</option>
+          }
+        </select>
+      </div>
+    </div>
+  </div><!-- end col-->
+</div>
+
+<div class="table-responsive">
+  <table class="table table-centered table-striped dt-responsive nowrap w-100">
+    <thead>
+      <tr>
+        <th *ngFor="let column of columns">{{ column.label }}</th>
+        <th *ngIf="actionsColumnTemplate">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of paginatedData; index as i">
+        <td *ngFor="let column of columns">
+          <ng-container *ngIf="columnTemplate; else defaultValue">
+              <ng-container *ngTemplateOutlet="columnTemplate; context: { $implicit: item, column: column, index: i }"></ng-container>
+          </ng-container>
+          <ng-template #defaultValue>
+            {{ getItemValue(item, column.key) }}
+          </ng-template>
+        </td>
+        <td *ngIf="actionsColumnTemplate">
+          <ng-container *ngTemplateOutlet="actionsColumnTemplate; context: { $implicit: item, index: i }"></ng-container>
+        </td>
+      </tr>
+      <tr *ngIf="filteredData.length === 0">
+        <td [attr.colspan]="columns.length + (actionsColumnTemplate ? 1 : 0)">It is not any item.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <span class="pagination-info">
+    Page {{ currentPage }} of {{ totalPages }} (Total: {{ totalItems }} items)
+  </span>
+
+  <ul class="pagination pagination-rounded justify-content-end mb-0">
+    <li class="page-item">
+      <button class="page-link pagination-button" (click)="goToFirstPage()" [disabled]="currentPage === 1 || totalPages === 0">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+    </li>
+    <li class="page-item">
+      <button class="page-link pagination-button" (click)="previousPage()" [disabled]="currentPage === 1  || totalPages === 0">
+        <span aria-hidden="true">&lsaquo;</span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+    </li>
+    @for(page of visiblePageNumbers; track page) {
+      <li [class]="'page-item' + (page === currentPage ? ' active' : '')">
+        <button
+          (click)="goToPage(page)"
+          class="page-link pagination-button"
+          [disabled]="page === currentPage">
+          {{ page }}
+        </button>
+      </li>
+    }
+    <li class="page-item">
+      <button class="page-link pagination-button" (click)="nextPage()" [disabled]="currentPage === totalPages || totalItems === 0">
+          <span aria-hidden="true"> &rsaquo; </span>
+          <span class="visually-hidden">Next</span>
+      </button>
+    </li>
+    <li class="page-item">
+      <button class="page-link pagination-button" (click)="goToLastPage()" [disabled]="currentPage === totalPages || totalItems === 0">
+        <span aria-hidden="true"> &raquo; </span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </li>
+  </ul>
+</div>
