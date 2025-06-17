@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project represents the frontend application, designed to provide a user-friendly interface for [briefly describe what the app does, e.g., managing events and ticket sales, viewing reports]. It follows a modular architecture, dividing its codebase into distinct sections to ensure clarity, maintainability, and reusability.
+This project represents the frontend application, designed to provide a user-friendly interface for show events and ticket sales. It follows a modular architecture, dividing its codebase into distinct sections to ensure clarity, maintainability, and reusability.
 
 ## Project Structure
 
